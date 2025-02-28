@@ -7,4 +7,4 @@ use Livewire\Component;
 class Appearance extends Component
 {
     //
-};
+}
