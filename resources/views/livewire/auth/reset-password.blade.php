@@ -1,5 +1,5 @@
 <div class="flex flex-col gap-6">
-    <x-auth-header title="Reset password" description="Please enter your new password below" />
+    <x-auth-header :title="__('Reset password')" :description="__('Please enter your new password below')" />
 
     <!-- Session Status -->
     <x-auth-session-status class="text-center" :status="session('status')" />
@@ -8,10 +8,8 @@
         <!-- Email Address -->
         <flux:input
             wire:model="email"
-            id="email"
             :label="__('Email')"
             type="email"
-            name="email"
             required
             autocomplete="email"
         />
@@ -19,25 +17,21 @@
         <!-- Password -->
         <flux:input
             wire:model="password"
-            id="password"
             :label="__('Password')"
             type="password"
-            name="password"
             required
             autocomplete="new-password"
-            placeholder="Password"
+            :placeholder="__('Password')"
         />
 
         <!-- Confirm Password -->
         <flux:input
             wire:model="password_confirmation"
-            id="password_confirmation"
             :label="__('Confirm password')"
             type="password"
-            name="password_confirmation"
             required
             autocomplete="new-password"
-            placeholder="Confirm password"
+            :placeholder="__('Confirm password')"
         />
 
         <div class="flex items-center justify-end">
