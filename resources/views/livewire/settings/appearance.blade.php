@@ -1,4 +1,4 @@
-<div class="flex flex-col items-start">
+<section class="w-full">
     @include('partials.settings-heading')
 
     <x-settings.layout :heading="__('Appearance')" :subheading=" __('Update the appearance settings for your account')">
@@ -8,4 +8,4 @@
             <flux:radio value="system" icon="computer-desktop">{{ __('System') }}</flux:radio>
         </flux:radio.group>
     </x-settings.layout>
-</div>
+</section>
