@@ -34,6 +34,7 @@
             required
             autocomplete="new-password"
             :placeholder="__('Password')"
+            viewable
         />
 
         <!-- Confirm Password -->
@@ -44,6 +45,7 @@
             required
             autocomplete="new-password"
             :placeholder="__('Confirm password')"
+            viewable
         />
 
         <div class="flex items-center justify-end">

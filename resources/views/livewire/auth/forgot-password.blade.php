@@ -13,6 +13,7 @@
             required
             autofocus
             placeholder="email@example.com"
+            viewable
         />
 
         <flux:button variant="primary" type="submit" class="w-full">{{ __('Email password reset link') }}</flux:button>
