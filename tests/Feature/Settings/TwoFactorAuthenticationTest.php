@@ -6,7 +6,6 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Laravel\Fortify\Features;
 use Livewire\Livewire;
-use Livewire\Volt\Volt;
 use Tests\TestCase;
 
 class TwoFactorAuthenticationTest extends TestCase
