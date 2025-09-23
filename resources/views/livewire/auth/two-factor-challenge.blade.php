@@ -5,12 +5,11 @@
             x-cloak
             x-data="{
                 showRecoveryInput: @js($errors->has('recovery_code')),
-
                 code: '',
                 recovery_code: '',
-
                 toggleInput() {
                     this.showRecoveryInput = !this.showRecoveryInput;
+
                     this.code = '';
                     this.recovery_code = '';
 
@@ -58,6 +57,7 @@
                             </flux:text>
                         @enderror
                     </div>
+
                     <div x-show="showRecoveryInput">
                         <div class="my-5">
                             <flux:input

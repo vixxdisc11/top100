@@ -12,6 +12,7 @@
             {{ __('Recovery codes let you regain access if you lose your 2FA device. Store them in a secure password manager.') }}
         </flux:text>
     </div>
+
     <div class="px-6">
         <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <flux:button
@@ -49,6 +50,7 @@
                 </flux:button>
             @endif
         </div>
+
         <div
             x-show="showRecoveryCodes"
             x-transition
