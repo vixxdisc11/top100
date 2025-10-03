@@ -22,7 +22,7 @@ class AuthenticationTest extends TestCase
 
     public function test_users_can_authenticate_using_the_login_screen(): void
     {
-        $user = User::factory()->create();
+        $user = User::factory()->withoutTwoFactor()->create();
 
         $response = Livewire::test(Login::class)
             ->set('email', $user->email)
