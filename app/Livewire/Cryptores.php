@@ -16,9 +16,7 @@ class Cryptores extends Component
         $this->fetchCryptos();
     }
 
-    /**
-     * 🔹 Obtiene la lista de criptomonedas directamente desde la API (sin caché)
-     */
+   
     public function fetchCryptos()
     {
         try {
@@ -40,9 +38,7 @@ class Cryptores extends Component
         }
     }
 
-    /**
-     * 🔁 Invierte manualmente el orden de un array
-     */
+   
     private function reverseArray($array)
     {
         $reversed = [];
@@ -55,48 +51,38 @@ class Cryptores extends Component
         return $reversed;
     }
 
-    /**
-     * 🔽 Ordena manualmente un array por precio descendente
-     */
+    
     private function sortByPriceDesc($array)
     {
         usort($array, fn($a, $b) => ($b['current_price'] ?? 0) <=> ($a['current_price'] ?? 0));
         return $array;
     }
 
-    /**
-     * 🔼 Ordena manualmente un array por precio ascendente
-     */
+   
     private function sortByPriceAsc($array)
     {
         usort($array, fn($a, $b) => ($a['current_price'] ?? 0) <=> ($b['current_price'] ?? 0));
         return $array;
     }
 
-    /**
-     * 🔻 Ordena por % cambio 24h descendente
-     */
+   
     private function sortByChangeDesc($array)
     {
         usort($array, fn($a, $b) => ($b['price_change_percentage_24h'] ?? 0) <=> ($a['price_change_percentage_24h'] ?? 0));
         return $array;
     }
 
-    /**
-     * 🔺 Ordena por % cambio 24h ascendente
-     */
+   
     private function sortByChangeAsc($array)
     {
         usort($array, fn($a, $b) => ($a['price_change_percentage_24h'] ?? 0) <=> ($b['price_change_percentage_24h'] ?? 0));
         return $array;
     }
 
-    /**
-     * 🧩 Orden compuesto: permite ordenar por múltiples criterios
-     */
+  
     private function multiSort($array, $options = [])
     {
-        // Ejemplo de $options: ['price' => 'desc', 'change' => 'asc']
+       
         usort($array, function ($a, $b) use ($options) {
             foreach ($options as $key => $direction) {
                 $aVal = $key === 'price' ? ($a['current_price'] ?? 0) : ($a['price_change_percentage_24h'] ?? 0);
@@ -118,7 +104,7 @@ class Cryptores extends Component
 
     public function render()
     {
-        // 🔹 Normalizamos la lista
+       
         $list = collect($this->cryptos ?? [])
             ->filter(fn($coin) =>
                 isset($coin['name']) &&
@@ -139,20 +125,20 @@ class Cryptores extends Component
             ->values()
             ->all();
 
-        // 🔹 Versiones básicas
+       
         $reversedList = $this->reverseArray($list);
         $priceDescList = $this->sortByPriceDesc($list);
         $priceAscList = $this->sortByPriceAsc($list);
         $changeDescList = $this->sortByChangeDesc($list);
         $changeAscList = $this->sortByChangeAsc($list);
 
-        // 🔹 Orden combinado
+      
         $multiPriceChangeDesc = $this->multiSort($list, ['price' => 'desc', 'change' => 'desc']);
         $multiPriceChangeAsc = $this->multiSort($list, ['price' => 'asc', 'change' => 'asc']);
         $multiPriceDescChangeAsc = $this->multiSort($list, ['price' => 'desc', 'change' => 'asc']);
         $multiPriceAscChangeDesc = $this->multiSort($list, ['price' => 'asc', 'change' => 'desc']);
 
-        // 🔹 Pasamos todo al frontend
+        
         return view('livewire.cryptores', [
             'cryptos' => $list, // normal
             'cryptosReversed' => $reversedList,
@@ -161,7 +147,7 @@ class Cryptores extends Component
             'cryptosChangeDesc' => $changeDescList,
             'cryptosChangeAsc' => $changeAscList,
 
-            // 🧩 Nuevos (orden compuesto)
+            
             'cryptosPriceChangeDesc' => $multiPriceChangeDesc,
             'cryptosPriceChangeAsc' => $multiPriceChangeAsc,
             'cryptosPriceDescChangeAsc' => $multiPriceDescChangeAsc,
