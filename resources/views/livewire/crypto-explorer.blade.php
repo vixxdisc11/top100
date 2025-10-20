@@ -2,7 +2,7 @@
     x-data="{ openFilters: false, search: @entangle('search').live }"
     class="relative flex w-full bg-gray-900/40 backdrop-blur-sm rounded-2xl border border-gray-800 text-gray-200 h-[80vh] overflow-hidden">
 
-    <!-- 🔹 SIDEBAR DE FILTROS -->
+    <!-- Filter Sidebar -->
     <div
         x-show="openFilters"
         x-transition:enter="transform transition ease-out duration-300"
@@ -16,7 +16,7 @@
         <div class="p-6 mt-14 space-y-8 text-left">
             <h2 class="text-lg font-semibold text-indigo-400 border-b border-gray-700 pb-2">Filters</h2>
 
-            <!-- 🔸 Market Cap -->
+            <!-- Market Cap -->
             <div>
                 <h3 class="text-xs uppercase text-gray-400 mb-3 tracking-wider">Market Cap</h3>
                 <div class="flex flex-col gap-2">
@@ -33,7 +33,7 @@
                 </div>
             </div>
 
-            <!-- 🔸 Price -->
+            <!-- Price -->
             <div>
                 <h3 class="text-xs uppercase text-gray-400 mb-3 tracking-wider">Price</h3>
                 <div class="flex flex-col gap-2">
@@ -50,7 +50,7 @@
                 </div>
             </div>
 
-            <!-- 🔸 Reset -->
+            <!-- Reset -->
             <div>
                 <button
                     wire:click="resetFilters"
@@ -60,7 +60,7 @@
             </div>
         </div>
 
-        <!-- 🔸 Botón de cerrar -->
+        <!-- Close Button -->
         <div class="p-4 border-t border-gray-800 bg-[#141518]/40">
             <button
                 @click="openFilters = false"
@@ -70,10 +70,10 @@
         </div>
     </div>
 
-    <!-- 🔹 CONTENEDOR PRINCIPAL -->
+    <!-- Main Container -->
     <div class="flex-1 relative p-8 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-gray-900">
 
-        <!-- ✅ Botón abrir filtros (siempre visible y fijo) -->
+        <!-- Open Filters Button (always visible and fixed) -->
         <button
             @click="openFilters = true"
             x-show="!openFilters"
@@ -85,7 +85,7 @@
             <span class="text-sm text-gray-200 font-medium">Filters</span>
         </button>
 
-        <!-- 🔹 Input de búsqueda -->
+        <!-- Search Input -->
         <div class="relative flex items-center justify-center mb-8 w-full md:w-2/3 mx-auto mt-4">
             <input
                 type="text"
@@ -105,7 +105,7 @@
             </button>
         </div>
 
-        <!-- 🔹 Lista de criptos -->
+        <!-- Crypto List -->
         @if (!empty($cryptos))
             <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
                 @foreach ($cryptos as $index => $coin)
@@ -132,7 +132,7 @@
 
                         <div class="text-sm text-gray-300">
                             <p class="mb-1">
-                                💲
+                                $
                                 <span class="font-semibold text-indigo-400">
                                     {{ isset($coin['current_price']) ? number_format($coin['current_price'], 2) : 'N/A' }}
                                 </span>
@@ -148,7 +148,7 @@
                 @endforeach
             </div>
         @else
-            <p class="text-gray-400 text-center mt-8 italic">⚠️ No data available. Please try again later.</p>
+            <p class="text-gray-400 text-center mt-8 italic">No data available. Please try again later.</p>
         @endif
     </div>
 </div>
