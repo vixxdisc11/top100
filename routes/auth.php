@@ -1,29 +1,34 @@
 <?php
 
-use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Livewire\Actions\Logout;
-use App\Livewire\Auth\ForgotPassword;
-use App\Livewire\Auth\Login;
-use App\Livewire\Auth\Register;
-use App\Livewire\Auth\ResetPassword;
-use App\Livewire\Auth\VerifyEmail;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware('guest')->group(function () {
-    Route::get('login', Login::class)->name('login');
-    Route::get('register', Register::class)->name('register');
-    Route::get('forgot-password', ForgotPassword::class)->name('password.request');
-    Route::get('reset-password/{token}', ResetPassword::class)->name('password.reset');
-});
+/*
+|--------------------------------------------------------------------------
+| Rutas de autenticación públicas
+|--------------------------------------------------------------------------
+|
+| Cualquiera puede acceder a login y register (sin middleware 'guest').
+|
+*/
 
-Route::middleware('auth')->group(function () {
-    Route::get('verify-email', VerifyEmail::class)
-        ->name('verification.notice');
+// 🟦 Login (vista personalizada)
+Route::get('/login', function () {
+    return view('login'); // resources/views/login.blade.php
+})->name('login');
 
-    Route::get('verify-email/{id}/{hash}', VerifyEmailController::class)
-        ->middleware(['signed', 'throttle:6,1'])
-        ->name('verification.verify');
-});
+// 🟦 Login (procesar formulario)
+Route::post('/login', [LoginController::class, 'authenticate'])->name('login.post');
 
-Route::post('logout', Logout::class)
-    ->name('logout');
+// 🟩 Register (vista personalizada)
+Route::get('/register', function () {
+    return view('register'); // resources/views/register.blade.php
+})->name('register');
+
+// 🟩 Register (procesar formulario)
+Route::post('/register', [RegisteredUserController::class, 'store'])->name('register.post');
+
+// 🔹 Logout (Livewire Breeze action)
+Route::post('/logout', Logout::class)->name('logout');

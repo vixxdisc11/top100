@@ -4,34 +4,31 @@ use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
 use App\Livewire\Settings\TwoFactor;
+use App\Livewire\CryptoDetail;
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Features;
+use Livewire\Livewire;
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
 
-Route::view('dashboard', 'dashboard')
-    ->middleware(['auth', 'verified'])
-    ->name('dashboard');
+Route::middleware(['auth', 'verified'])->group(function () {
 
-Route::middleware(['auth'])->group(function () {
-    Route::redirect('settings', 'settings/profile');
 
-    Route::get('settings/profile', Profile::class)->name('settings.profile');
-    Route::get('settings/password', Password::class)->name('settings.password');
-    Route::get('settings/appearance', Appearance::class)->name('settings.appearance');
+    Route::get('/', function () {
+        return view('cryptos');
+    })->name('home');
 
-    Route::get('settings/two-factor', TwoFactor::class)
-        ->middleware(
-            when(
-                Features::canManageTwoFactorAuthentication()
-                    && Features::optionEnabled(Features::twoFactorAuthentication(), 'confirmPassword'),
-                ['password.confirm'],
-                [],
-            ),
-        )
-        ->name('two-factor.show');
+
+    Route::get('/2', function () {
+        return view('searchs');
+    })->name('crypto.search');
+
+
+    Route::get('/crypto/{id}', function ($id) {
+        return Livewire::mount('crypto-detail', ['id' => $id])->html();
+    })->name('crypto.detail');
+Route::post('/favorites/toggle', [FavoriteController::class, 'toggle'])->name('favorites.toggle');
+    Route::get('/favorites', [FavoriteController::class, 'list'])->name('favorites.list');
+
 });
 
 require __DIR__.'/auth.php';
