@@ -6,18 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
-     <link rel="icon" type="image/png" href="{{ asset('img/crylog2.png') }}">
+    <link rel="icon" type="image/png" href="{{ asset('img/crylog2.png') }}">
     <title>CryptoTop100</title>
 </head>
 <body>
     <div class="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#0f0f11] to-[#1a1c20] text-gray-100 relative overflow-hidden">
 
-    <!-- 🎥 Fondo de video -->
+    <!-- Video background -->
     <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover opacity-20">
         <source src="{{ asset('zzz.mp4') }}" type="video/mp4">
     </video>
 
-    <!-- 🔹 Contenedor principal -->
+    <!-- Main container -->
     <div class="relative z-10 w-full max-w-md bg-gray-900/40 backdrop-blur-xl rounded-2xl border border-gray-800 p-8 shadow-2xl">
 
         <!-- Logo -->
@@ -26,7 +26,7 @@
                  class="w-28 h-28 object-contain drop-shadow-md hover:scale-105 transition-transform duration-300">
         </div>
 
-        <!-- Título -->
+        <!-- Title -->
         <h2 class="text-center text-3xl font-bold text-white mb-2 tracking-tight">
             Log in to your account
         </h2>
@@ -39,7 +39,7 @@
             </a>
         </p>
 
-        <!-- 🔐 Formulario funcional de Laravel Breeze + Livewire -->
+        <!-- Functional Laravel Breeze + Livewire Form -->
         <div class="flex flex-col gap-6">
 
             <!-- Session Status -->
