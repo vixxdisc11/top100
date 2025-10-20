@@ -15,15 +15,15 @@
 
 <body class="min-h-screen flex flex-col bg-gradient-to-b from-[#0f0f11] to-[#1a1c20] text-gray-100 relative overflow-hidden">
 
-    <!-- 🎥 Fondo video tipo Wall Street -->
+    <!-- Background video (Wall Street style) -->
     <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover opacity-10">
         <source src="{{ asset('videos/stock-background.mp4') }}" type="video/mp4">
     </video>
 
-    <!-- 🔹 Overlay -->
+    <!-- Overlay -->
     <div class="absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 to-black/90"></div>
 
-    <!-- 🔹 Navbar -->
+    <!-- Navbar -->
     <nav class="flex justify-between items-center px-8 py-4 bg-[#141518]/90 backdrop-blur-md shadow-sm fixed top-0 left-0 w-full z-50 border-b border-gray-800">
         <a href="/" class="flex items-center gap-3">
             <img src="{{ asset('img/crylog2.png') }}"
@@ -39,7 +39,7 @@
         </div>
     </nav>
 
-    <!-- 🔹 Contenido principal -->
+    <!-- Main content -->
     <main class="relative z-10 flex-grow flex justify-center items-start px-6 pt-28 pb-10 overflow-y-auto">
         @if (!empty($coin))
             <div class="w-full max-w-4xl bg-gray-900/60 backdrop-blur-xl border border-gray-800 rounded-2xl shadow-2xl p-8 overflow-hidden max-h-[85vh] flex flex-col">
@@ -67,31 +67,29 @@
                 <!-- Stats Grid -->
                 <div class="grid sm:grid-cols-3 gap-6 text-center mb-8 flex-shrink-0">
                     <div class="bg-gray-800/60 border border-gray-700 rounded-xl p-5 hover:bg-gray-800/80 transition">
-                        <p class="text-sm text-gray-400 mb-1">💶 Current Price</p>
+                        <p class="text-sm text-gray-400 mb-1">Current Price</p>
                         <p class="text-2xl font-bold text-indigo-400">
                             €{{ number_format($coin['price'] ?? 0, 2) }}
                         </p>
                     </div>
 
                     <div class="bg-gray-800/60 border border-gray-700 rounded-xl p-5 hover:bg-gray-800/80 transition">
-                        <p class="text-sm text-gray-400 mb-1">📊 Market Cap</p>
+                        <p class="text-sm text-gray-400 mb-1">Market Cap</p>
                         <p class="text-2xl font-bold text-green-400">
                             €{{ number_format($coin['market_cap'] ?? 0) }}
                         </p>
                     </div>
 
                     <div class="bg-gray-800/60 border border-gray-700 rounded-xl p-5 hover:bg-gray-800/80 transition">
-                        <p class="text-sm text-gray-400 mb-1">📈 24h Change</p>
+                        <p class="text-sm text-gray-400 mb-1">24h Change</p>
                         <p class="text-2xl font-bold {{ ($coin['change_24h'] ?? 0) >= 0 ? 'text-green-400' : 'text-red-400' }}">
                             {{ number_format($coin['change_24h'] ?? 0, 2) }}%
                         </p>
                     </div>
                 </div>
 
-                <!-- ⭐ Favorite Button -->
-
-
-               <div class="flex-grow ">
+                <!-- Description -->
+                <div class="flex-grow ">
                     <h2 class="text-2xl font-semibold text-white mb-3 flex items-center gap-2">
                         Description
                     </h2>
@@ -109,7 +107,7 @@
                 </div>
             </div>
         @else
-            <p class="text-center text-gray-400 italic mt-20">⚠️ No cryptocurrency data available.</p>
+            <p class="text-center text-gray-400 italic mt-20">No cryptocurrency data available.</p>
         @endif
     </main>
 </body>
