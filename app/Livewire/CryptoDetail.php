@@ -4,14 +4,14 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Request; // 👈 Importar correctamente
+use Illuminate\Support\Facades\Request; 
 
 class CryptoDetail extends Component
 {
     public $coin = null;
     public $coinId = null;
 
-    // 👇 SE AGREGA ESTE MÉTODO
+
 
     public function mount($id = null)
 {
