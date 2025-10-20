@@ -3,16 +3,15 @@
         search: '{{ request('query', '') }}',
         showReversed: false,
         priceOrder: null,
-        changeOrder: null // 'asc', 'desc' o null
+        changeOrder: null // 'asc', 'desc' or null
     }"
     class="bg-gray-900/40 backdrop-blur-sm rounded-2xl border border-gray-800 text-gray-200 p-6 shadow-lg"
 >
 
-
-    <!-- 🔹 Search Bar + Filter Buttons -->
+    <!-- Search Bar + Filter Buttons -->
     <div class="flex flex-col md:flex-row items-center justify-between mb-8 gap-4">
 
-        <!-- 🔍 Search Field -->
+        <!-- Search Field -->
         <div class="flex items-center justify-center w-full md:w-1/2">
             <input
                 type="text"
@@ -27,10 +26,10 @@
                 title="Clear">✕</button>
         </div>
 
-        <!-- 🔹 Filter Buttons -->
+        <!-- Filter Buttons -->
         <div class="flex flex-wrap justify-center md:justify-end w-full gap-3">
 
-            <!-- 🔸 Market Cap Toggle -->
+            <!-- Market Cap Toggle -->
             <button
                 @click="
                     showReversed = !showReversed;
@@ -43,7 +42,7 @@
                 class="px-5 py-2.5 rounded-lg font-semibold text-sm tracking-wide transition duration-300 border border-gray-700 hover:border-indigo-400">
             </button>
 
-            <!-- 💰 Price Order Toggle -->
+            <!-- Price Order Toggle -->
             <button
                 @click="
                     if (priceOrder === null) { priceOrder = 'desc'; showReversed = false; }
@@ -63,7 +62,7 @@
                 class="px-5 py-2.5 rounded-lg font-semibold text-sm tracking-wide transition duration-300 border border-gray-700 hover:border-indigo-400">
             </button>
 
-            <!-- 📊 24h % Order Toggle -->
+            <!-- 24h % Order Toggle -->
             <button
                 @click="
                     if (changeOrder === null) { changeOrder = 'desc'; showReversed = false; }
@@ -85,7 +84,7 @@
         </div>
     </div>
 
-    <!-- 🔹 Table Header -->
+    <!-- Table Header -->
     <div class="hidden md:flex items-center justify-between text-xs uppercase text-gray-400 border-b border-gray-800 pb-2 px-4">
         <div class="w-10 text-left">#</div>
         <div class="flex-1 text-left">Name</div>
@@ -95,74 +94,75 @@
         <div class="w-40 text-right">Volume</div>
     </div>
 
-    <!-- 🔹 Dynamic Coin List -->
+    <!-- Dynamic Coin List -->
     <div class="divide-y divide-gray-800 mt-3">
 
-        <!-- 🟣 Default (Normal) -->
+        <!-- Default (Normal) -->
         <template x-if="!showReversed && priceOrder === null && changeOrder === null">
             <div x-transition.opacity.duration.300ms>
                 @include('livewire.partials.crypto-list', ['data' => $cryptos])
             </div>
         </template>
 
-        <!-- 🟢 Market Cap Reversed -->
+        <!-- Market Cap Reversed -->
         <template x-if="showReversed && priceOrder === null && changeOrder === null">
             <div x-transition.opacity.duration.300ms>
                 @include('livewire.partials.crypto-list', ['data' => $cryptosReversed])
             </div>
         </template>
 
-        <!-- 💰 Price ↓ -->
+        <!-- Price ↓ -->
         <template x-if="priceOrder === 'desc'">
             <div x-transition.opacity.duration.300ms>
                 @include('livewire.partials.crypto-list', ['data' => $cryptosPriceDesc])
             </div>
         </template>
 
-        <!-- 💰 Price ↑ -->
+        <!-- Price ↑ -->
         <template x-if="priceOrder === 'asc'">
             <div x-transition.opacity.duration.300ms>
                 @include('livewire.partials.crypto-list', ['data' => $cryptosPriceAsc])
             </div>
         </template>
 
-        <!-- 📉 24h % ↓ -->
+        <!-- 24h % ↓ -->
         <template x-if="changeOrder === 'desc'">
             <div x-transition.opacity.duration.300ms>
                 @include('livewire.partials.crypto-list', ['data' => $cryptosChangeDesc])
             </div>
         </template>
 
-        <!-- 📈 24h % ↑ -->
+        <!-- 24h % ↑ -->
         <template x-if="changeOrder === 'asc'">
             <div x-transition.opacity.duration.300ms>
                 @include('livewire.partials.crypto-list', ['data' => $cryptosChangeAsc])
             </div>
         </template>
 
-        <!-- 🟦 Price + Change Combined -->
+        <!-- Price + Change Combined -->
         <template x-if="(priceOrder !== null) && (changeOrder !== null)">
             <div x-transition.opacity.duration.300ms>
                 @include('livewire.partials.crypto-list', ['data' => $cryptosPriceDesc])
                 @include('livewire.partials.crypto-list', ['data' => $cryptosChangeAsc])
             </div>
         </template>
-            <!-- 🧩 Price ↓ + 24h % ↓ -->
+
+        <!-- Price ↓ + 24h % ↓ -->
         <template x-if="priceOrder === 'desc' && changeOrder === 'desc'">
             <div>@include('livewire.partials.crypto-list', ['data' => $cryptosPriceChangeDesc])</div>
         </template>
 
-        <!-- 🧩 Price ↑ + 24h % ↑ -->
+        <!-- Price ↑ + 24h % ↑ -->
         <template x-if="priceOrder === 'asc' && changeOrder === 'asc'">
             <div>@include('livewire.partials.crypto-list', ['data' => $cryptosPriceChangeAsc])</div>
         </template>
 
-        <!-- 🧩 Price ↓ + 24h % ↑ -->
+        <!-- Price ↓ + 24h % ↑ -->
         <template x-if="priceOrder === 'desc' && changeOrder === 'asc'">
             <div>@include('livewire.partials.crypto-list', ['data' => $cryptosPriceDescChangeAsc])</div>
         </template>
 
-        <!-- 🧩 Price ↑ + 24h % ↓ -->
+        <!-- Price ↑ + 24h % ↓ -->
         <template x-if="priceOrder === 'asc' && changeOrder === 'desc'">
             <div>@include('livewire.partials.crypto-list', ['data' => $cryptosPriceAscChangeDesc])</div>
         </template>
